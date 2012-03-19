@@ -1,0 +1,4 @@
+==Ideas==
+    * MongoDB distributed filesystem (gridfs) (http://www.mongodb.org/display/DOCS/GridFS)
+        - this exists w/o directory or perm support
+    
