@@ -32,10 +32,16 @@ class Essay_Model extends CI_Model{
                         // done working, it should return the extracted entities 
                         $text_with_entities = $job_result['data'];
                         //now, we have to extract and count all the entities
-                        preg_match_all("/<TOPIC>(.*?)<\/TOPIC>/",$text_with_entities,$entities,PREG_PATTERN_ORDER);
-                        return $entities[1];
-                        //foreach($entities as $entity){
-                       // }
+                        preg_match_all("/<TOPIC>(.*?)<\/TOPIC>/",$text_with_entities,$all_entities,PREG_PATTERN_ORDER);
+                        $entities = array();
+                        foreach($all_entities[1] as $entity){
+                           if(array_key_exists($entity,$entities)){
+                                $entities[$entity]++; 
+                           }else{
+                                $entities[$entity] = 1; 
+                           }
+                       }
+                       return $entities;
 
                     }
                 }
