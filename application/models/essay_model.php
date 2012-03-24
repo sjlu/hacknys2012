@@ -2,14 +2,14 @@
 
 class Essay_Model extends CI_Model{
 
-    private $PARSELY_TIMEOUT_SECONDS = 15;
+    private $PARSELY_TIMEOUT_SECONDS = 20;
     private $PARSELY_API_ROOT = "http://hack.parsely.com";
 
     public function Essay_Model(){
         parent::__construct();
     }
 
-    public function extract_entities($essay_text){
+    public function extract_entities($essay_text, $num_entities=5){
         //post the essay to parse.ly
         $url = $this->PARSELY_API_ROOT . "/parse";
         $result = self::post($url,array('text'=>$essay_text, 'wiki_filter' => 'false'));
@@ -41,7 +41,8 @@ class Essay_Model extends CI_Model{
                                 $entities[$entity] = 1; 
                            }
                        }
-                       return $entities;
+                       array_multisort($entities,SORT_DESC);
+                       return array_slice($entities,0,$num_entities);
 
                     }
                 }
