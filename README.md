@@ -1,3 +1,8 @@
+# Fantastic Ideas
+* carrotnet
+    * mobile hotspot on phone/router (i like phone better)
+    * route all traffic through our proxy, replace all images with carrots (or overlap text on top of all images? ads? memes?)
+
 # Ideas
 * MongoDB distributed filesystem (gridfs) (http://www.mongodb.org/display/DOCS/GridFS)
     * this exists w/o directory or perm support
