@@ -15,9 +15,10 @@ class Test extends CI_Controller {
 
     function entities () {
         $this->load->model('Essay_Model');
+        $this->load->model('Parsely_Articles');
 
         echo '<pre>';
-        var_dump($this->Essay_Model->extract_entities("
+        $entities = $this->Essay_Model->extract_entities("
         Polls opened across Louisiana at 7 a.m. EDT and will remain open until 9 p.m. EDT. Just 20 of the state’s delegates are at stake and will be allocated proportionally among candidates earning more than 25 percent of the vote. If no candidate earns above 25 percent, the delegates will remain uncommitted. An additional 23 delegates will be selected at the state Republican convention in June.
         
         The state has 2.86 million registered voters and residents cast 43,576 early ballots; about half of those were from Republicans, according to the Louisiana secretary of state’s office. Registered Democrats are also voting in a statewide primary, but President Obama has only token opposition.
@@ -69,7 +70,15 @@ class Test extends CI_Controller {
         'He’s a little too highfalutin — too much money,' Tranchant said. 'He don’t know what life’s all about. He don’t work for a living.'
         
         O’Keefe reported from Washington. Staff writer Nia-Malika Henderson contributed to this report from Shreveport, La.
-        ",5));
+        ",5);
+        print "We got these entities:\n";
+        var_dump($entities);
+        $result = $this->Parsely_Articles->get($entities);
+        print "Those gave us these articles:\n";
+        var_dump($result);
+        echo "</pre>";
+
+
     }
 
 }
