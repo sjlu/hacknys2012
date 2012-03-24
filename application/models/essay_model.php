@@ -4,6 +4,7 @@ class Essay_Model extends CI_Model{
 
     private $PARSELY_TIMEOUT_SECONDS = 20;
     private $PARSELY_API_ROOT = "http://hack.parsely.com";
+    private $entities;
 
     public function Essay_Model(){
         parent::__construct();
@@ -33,16 +34,16 @@ class Essay_Model extends CI_Model{
                         $text_with_entities = $job_result['data'];
                         //now, we have to extract and count all the entities
                         preg_match_all("/<TOPIC>(.*?)<\/TOPIC>/",$text_with_entities,$all_entities,PREG_PATTERN_ORDER);
-                        $entities = array();
+                        $this->entities = array();
                         foreach($all_entities[1] as $entity){
-                           if(array_key_exists($entity,$entities)){
-                                $entities[$entity]++; 
+                           if(array_key_exists($entity,$this->entities)){
+                                $this->entities[$entity]++; 
                            }else{
-                                $entities[$entity] = 1; 
+                                $this->entities[$entity] = 1; 
                            }
                        }
-                       array_multisort($entities,SORT_DESC);
-                       return array_slice($entities,0,$num_entities);
+                       array_multisort($this->entities,SORT_DESC);
+                       return array_slice($this->entities,0,$num_entities);
 
                     }
                 }
