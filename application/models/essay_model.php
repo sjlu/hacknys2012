@@ -43,7 +43,7 @@ class Essay_Model extends CI_Model{
                            }
                        }
                        array_multisort($this->entities,SORT_DESC);
-                       return array_slice($this->entities,0,$num_entities);
+                       return array_keys(array_slice($this->entities,0,$num_entities));
 
                     }
                 }
