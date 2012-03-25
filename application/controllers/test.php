@@ -19,6 +19,7 @@ class Test extends CI_Controller {
         $this->load->model('Bibliography');
         $this->load->model('NYTimes');
         $this->load->model('Sentence');
+        $this->load->model('Quotes');
 
         print '<pre>';
         $essay = "  Polls opened across Louisiana at 7 a.m. EDT and will remain open until 9 p.m. EDT. Just 20 of the state's delegates are at stake and will be allocated proportionally among candidates earning more than 25 percent of the vote. If no candidate earns above 25 percent, the delegates will remain uncommitted. An additional 23 delegates will be selected at the state Republican convention in June.
@@ -99,9 +100,10 @@ class Test extends CI_Controller {
 
         print "<br/>We got the output:<br/>\n";
        // split input into sentences
-       $sentences = $this->Sentence->tokenize($beefy_essay);
-       $beefy_essay = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
-       $beefy_essay = $this->Essay_Model->add_filler_sentences($articles,$sentences,5);
+       $beefy_essay= $this->Sentence->tokenize($beefy_essay);
+       $beefy_essay = $this->Essay_Model->add_filler_sentences($articles,$beefy_essay,5);
+       $beefy_essay = $this->Essay_Model->add_intext_citations($articles,$bibliography,$beefy_essay);
+       //$beefy_essay= $this->Quotes->run($entities, $articles, $beefy_essay);
        $beefy_essay = implode(" ",$beefy_essay);
        print $beefy_essay;
 
