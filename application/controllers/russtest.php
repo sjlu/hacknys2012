@@ -8,6 +8,7 @@ class Russtest extends CI_Controller {
         $this->load->model('Bibliography');
         $this->load->model('NYTimes');
         $this->load->model('Quotes');
+        $this->load->model('Sentence');
 
         $input = array();
 
@@ -15,7 +16,11 @@ class Russtest extends CI_Controller {
 
         The US has voiced concern that the rocket launch due in apri: is a pretext for a missile test. Pyongyang says it wants to put a satellite into orbit.";
 
-        $entities = $this->Essay_Model->extract_entities($input['essay']);
+//        $entities = $this->Essay_Model->extract_entities($input['essay']);
+
+        $entities[] = "Obama";
+        $entities[] = "Rick Santorum";
+        $entities[] = "Republican";
 
         $nytimes_articles = $this->NYTimes->get($entities);
         $parsely_articles = $this->Parsely_Articles->get($entities);
@@ -33,7 +38,9 @@ class Russtest extends CI_Controller {
 
         $output = array();
 
-        $output['essay'] = $this->Quotes->run($entities, $articles, $input['essay']);
+        $inp = $this->Sentence->tokenize($input['essay']);
+
+        $output['essay'] = $this->Quotes->run($entities, $parsely_articles, $inp);
 
         echo $output['essay'];
     }
@@ -49,7 +56,6 @@ class Russtest extends CI_Controller {
 
         echo '<pre>';
 
-        var_dump($this->Sentence->tokenize($input['essay']));
     }
 
 };
