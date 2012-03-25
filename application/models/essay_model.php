@@ -29,14 +29,14 @@ class Essay_Model extends CI_Model{
                );
         //get random template
         $template = $filler_templates[array_rand($filler_templates)];
-        return sprintf($template,$keyword);
+        return sprintf($template,$keyword,$keyword);
 
     }
 
     public function add_filler_sentences($articles,$sentences,$num_to_add){
         for($i =0; $i < $num_to_add; $i++){
             $keyword = array_rand($articles);     
-            $random_sentence = self::get_filler_sentence($keyword);
+            $random_sentence = "<span class='new filler'> " . self::get_filler_sentence($keyword). "</span>"; 
             $random_index = rand(3,count($sentences)-4);
             array_splice($sentences ,$random_index,0,$random_sentence);
         }
@@ -52,7 +52,7 @@ class Essay_Model extends CI_Model{
                 $citation_obj = $bibliography[$keyword];
                 //if this sentence has this keywork, add a citation at the end (and only one)
                 if( preg_match("/$keyword.*?<\/TOPIC>/", $sentence)){
-                    $sentence .= " " . $citation_obj['in-text']; 
+                    $sentence .= " <span class='new in-text'>" . $citation_obj['in-text'] . "</span>"; 
                     break;
                 }
             }
