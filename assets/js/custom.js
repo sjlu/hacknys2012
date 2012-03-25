@@ -76,9 +76,24 @@ function Interface_page () {
       //$('#container').animate({ backgroundColor: "#eaeaea" }, 1000);
    }
 
-   function priv()
+   function write_essay(html)
    {
+      $('#content').html(html);
+   }
 
+   function write_biblio(data_array)
+   {
+      var output = "";
+      
+      var inline;
+      for (inline in data_array)
+      {
+         if (data_array[inline].citation != undefined)
+            output += data_array[inline].citation;
+            output += "<br />";
+      }
+
+      $('#content-biblio').html(output);
    }
 
    var exports = {};
@@ -87,10 +102,17 @@ function Interface_page () {
    {
       /*
        * Stuff passed to me:
-       * essay, bibliography, beefed_essay, images
+       * essay, bibliography(Array), beefed_essay, images(Array)
        */
+      
+      // Writing HTML shit now
+      write_essay(data.beefed_essay);
+      write_biblio(data.bibliography);
+      //alert(data.bibliography);
+
       change_background();
       $('#page-interface').fadeIn();
+      
    }
    exports.load = load;
 

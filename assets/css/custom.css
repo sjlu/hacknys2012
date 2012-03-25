@@ -124,3 +124,17 @@ textarea
    width: 198px;
    height: 150px;
 }
+
+#content
+{
+   width: 940px;
+   margin: 20px auto 0;
+   font-size: 12pt;
+   line-height: 18pt;
+}
+
+#content-biblio
+{
+   width: 940px;
+   margin: 20px auto 0;
+}
