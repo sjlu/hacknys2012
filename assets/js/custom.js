@@ -37,7 +37,11 @@ function Loading_page () {
          success: function(data)
          {
             // parsing response from api
-            alert(data.essay);
+            //alert(data.essay);
+            $('#page-loading').fadeOut(function()
+            {
+               interface_page.load(data);
+            });
          }
       });
    }
@@ -66,6 +70,12 @@ function Loading_page () {
  */
 function Interface_page () {
    
+   function change_background()
+   {
+      $('body').css('background','#eaeaea');
+      //$('#container').animate({ backgroundColor: "#eaeaea" }, 1000);
+   }
+
    function priv()
    {
 
@@ -73,11 +83,16 @@ function Interface_page () {
 
    var exports = {};
    
-   function pub()
+   function load(data)
    {
-
+      /*
+       * Stuff passed to me:
+       * essay, bibliography, beefed_essay, images
+       */
+      change_background();
+      $('#page-interface').fadeIn();
    }
-   exports.pub = pub;
+   exports.load = load;
 
    return exports;
 }
