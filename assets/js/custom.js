@@ -37,7 +37,7 @@ var Loading_page = function () {
             type: 'POST',
             async: true,
             dataType: 'json',
-            timeout: 35000,
+            timeout: 25000,
             data: {data: JSON.stringify(data)},
             success: function(data)
             {
@@ -206,6 +206,35 @@ function Interface_page () {
 
    var exports = {};
    
+   function change_tooltip(beeflevel)
+   {
+      var color = "label-warning";
+      if (beeflevel < 2)
+         color = "label-important";
+      else if (beeflevel > 2)
+         color = "label-success";
+
+      var text;
+      if (beeflevel == 0)
+         text = "Rare";
+      else if (beeflevel == 1)
+         text = "Medium Rare";
+      else if (beeflevel == 2)
+         text = "Medium";
+      else if (beeflevel == 3)
+         text = "Medium Well";
+      else if (beeflevel == 4)
+         text = "Well Done";
+
+      $('#beef-label').removeClass('label-warning');
+      $('#beef-label').removeClass('label-important');
+      $('#beef-label').removeClass('label-success');
+      
+      $('#beef-label').addClass(color);
+      $('#beef-label').html(text);
+   }
+   exports.change_tooltip = change_tooltip;
+
    function load(data)
    {
       /*
@@ -272,7 +301,7 @@ $(document).ready(function()
       slide: function(event, ui) {
          //$("#slider-result").html(ui.value);
          // change tooltip here.
-         // interface_page.change_tooltip(ui.value);
+         interface_page.change_tooltip(ui.value);
       },
       change: function(event, ui) {
          //$("#hidden").attr('value', ui.value);

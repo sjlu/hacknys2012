@@ -72,8 +72,8 @@
    </div>
   
    <div class="centered" id="loading-indicator-container" style="display: none">
-      <div id="loading-indicator-small"></div><br />
-      Cooking Your Meat At<br />
+      <div id="loading-indicator-small"></div><br /><br />
+      Your Essay is Being Cooked At<br />
       <span id="beef-label" class="label label-warning">Medium Rare</span>
    </div>
 

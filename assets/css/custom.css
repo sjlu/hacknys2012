@@ -241,12 +241,18 @@ textarea
 #loading-indicator-container
 {
    text-align: center;
-   font-size: 22px; 
+   font-size: 20px; 
    line-height: 24px;  
 }
 
 #loading-indicator-small
 {
-   width: 100px;
+   width: 68px;
+   padding-left: 68px;
    margin: 100px auto;
+}
+
+#beef-label
+{
+   font-size: 14px;
 }
