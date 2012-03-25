@@ -88,7 +88,7 @@ class Essay_Model extends CI_Model{
                     }else{
                         // done working, it should return the extracted entities 
                         $result = preg_replace("/---NEWLINE---/","<br/>",$job_result['data']);
-                        $result = preg_replace("/ ([^[a-zA-Z0-9\s])/","$1",$result);
+                        //$result = preg_replace("/ ([^[a-zA-Z0-9\s])/","$1",$result);
 
                         return $result;
                     }
