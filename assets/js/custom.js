@@ -89,11 +89,53 @@ function Interface_page () {
       for (inline in data_array)
       {
          if (data_array[inline].citation != undefined)
+         {
             output += data_array[inline].citation;
             output += "<br />";
+         }
       }
 
       $('#content-biblio').html(output);
+   }
+
+   function write_images(data_array)
+   {
+      var output = "";
+
+      var image;
+      for (image in data_array)
+      {
+         if (data_array[image][0] != undefined)
+         {
+            output += '<div class="image-holder"><img src="'+data_array[image][0]+'" class="image" alt="inline-image" onerror="this.parentNode.removeChild(this);" /></div>';
+         }
+      }
+
+      $('#content-images').html(output);
+   }
+
+   function write_statboxes(data)
+   {
+      // Get source count
+      var source_count = 0;
+      for (var source in data.bibliography)
+         source_count++;
+
+      // Get word count (hacked up)
+      var word_count = 0;
+      var words = data.beefed_essay.split(" ");
+      for (var i = 0; i < words.length; i++)
+      {
+         if (words[i] != "")
+            word_count++;
+      }
+
+      // Get loaded image count.
+      var image_count = document.images.length-5;
+      
+      $('#word-count').html(word_count);
+      $('#source-count').html(source_count);
+      $('#image-count').html(image_count);
    }
 
    var exports = {};
@@ -108,6 +150,8 @@ function Interface_page () {
       // Writing HTML shit now
       write_essay(data.beefed_essay);
       write_biblio(data.bibliography);
+      write_images(data.images);
+      write_statboxes(data);
       //alert(data.bibliography);
 
       change_background();
