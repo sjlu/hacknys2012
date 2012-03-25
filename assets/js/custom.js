@@ -265,7 +265,7 @@ $(document).ready(function()
    $('.slider').slider({
       animate: true,
       range: "min",
-      value: 4,
+      value: 2,
       min: 0,
       max: 4,
       //step: 1,
