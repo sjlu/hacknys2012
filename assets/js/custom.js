@@ -226,11 +226,11 @@ function Interface_page () {
    }
    exports.load = load;
    
-   function do_reload()
+   function do_reload(beeflevel)
    {
       var data_obj = {};
       data_obj.essay = $('#essay-text').val();
-      data_obj.cooked = $('#beef-slider').val();
+      data_obj.cooked = beeflevel;
       
       $('#content-container').fadeOut();
       $('#loading-indicator-container').fadeIn();
@@ -274,8 +274,8 @@ $(document).ready(function()
          // change tooltip here.
       },
       change: function(event, ui) {
-         $("#hidden").attr('value', ui.value);
-         interface_page.do_reload();
+         //$("#hidden").attr('value', ui.value);
+         interface_page.do_reload(ui.value);
          // do post values here.
       }
    });
