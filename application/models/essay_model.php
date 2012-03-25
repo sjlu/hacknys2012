@@ -33,6 +33,16 @@ class Essay_Model extends CI_Model{
 
     }
 
+    public function add_filler_sentences($articles,$sentences,$num_to_add){
+        for($i =0; $i < $num_to_add; $i++){
+            $keyword = array_rand($articles);     
+            $random_sentence = self::get_filler_sentence($keyword);
+            $random_index = rand(3,count($sentences)-4);
+            array_splice($sentences ,$random_index,0,$random_sentence);
+        }
+        return $sentences;
+    }
+
     public function add_intext_citations($articles,$bibliography,$sentences){
         $return = array();        
         foreach ($sentences as $sentence){ 
@@ -99,6 +109,7 @@ class Essay_Model extends CI_Model{
 
     public function extract_entities($parsely_text, $num_entities=5){
         if(! $parsely_text){ 
+            print "input text was empty";
             return false;
         }else{
             $this->text_with_entities=$parsely_text;

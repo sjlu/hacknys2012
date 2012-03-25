@@ -101,6 +101,7 @@ class Test extends CI_Controller {
        // split input into sentences
        $sentences = $this->Sentence->tokenize($beefy_essay);
        $beefy_essay = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
+       $beefy_essay = $this->Essay_Model->add_filler_sentences($articles,$sentences,5);
        $beefy_essay = implode(" ",$beefy_essay);
        print $beefy_essay;
 
