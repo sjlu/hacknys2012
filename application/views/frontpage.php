@@ -72,7 +72,9 @@
    </div>
   
    <div class="centered" id="loading-indicator-container" style="display: none">
-      <div id="loading-indicator-small"></div>
+      <div id="loading-indicator-small"></div><br />
+      Cooking Your Meat At<br />
+      <span id="beef-label" class="label label-warning">Medium Rare</span>
    </div>
 
    <table border="0" id="content-container">

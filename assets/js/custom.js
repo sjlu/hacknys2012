@@ -37,7 +37,7 @@ var Loading_page = function () {
             type: 'POST',
             async: true,
             dataType: 'json',
-            timeout: 25000,
+            timeout: 35000,
             data: {data: JSON.stringify(data)},
             success: function(data)
             {
@@ -65,7 +65,7 @@ var Loading_page = function () {
             // ajax request
             run_ajax(data_obj);
             rotate_fact();
-            interval_id = setInterval(loading_page.rotate_fact, 4500);
+            interval_id = setInterval(loading_page.rotate_fact, 5500);
          });
       }
       exports.load = load;
@@ -270,8 +270,9 @@ $(document).ready(function()
       max: 4,
       //step: 1,
       slide: function(event, ui) {
-         $("#slider-result").html(ui.value);
+         //$("#slider-result").html(ui.value);
          // change tooltip here.
+         // interface_page.change_tooltip(ui.value);
       },
       change: function(event, ui) {
          //$("#hidden").attr('value', ui.value);
@@ -289,4 +290,10 @@ $(document).ready(function()
       speed: 1.5
    });
 
+   $('.ui-slider-handle').tooltip({
+      animation: true,
+      placement: 'bottom',
+      title: 'Slide for Tenderness',
+      delay: { show: 500, hide: 1000 }
+   });
 });
