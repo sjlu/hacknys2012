@@ -57,8 +57,9 @@ class Quotes extends CI_Model {
                 if (strstr($line, $topic) != NULL) {
                     $rnd = rand(0, $chance);
                     if ($rnd == 1) {
-                        $rnd_quote = rand(0, count($quotes[$topic]) - 1);
-                        //array_splice($essay, $line_num, 0, $quotes[$topic][$rnd_quote]);
+                        $num = rand(0, count($quotes[$topic]) - 1);
+                        $rnd_quote = "<span class=\"new beefquote\">" . $quotes[$topic][$num] . "</span>";
+                        array_splice($essay, $line_num, 0, $rnd_quote);
                     }
                 }
             }
