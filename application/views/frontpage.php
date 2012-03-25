@@ -50,6 +50,19 @@
       </div>
    </div>
    
-   <div id="content"></div>
-   <div id="content-biblio"></div>
+   <table border="0" id="content-container">
+   <tr>
+      <td valign="top" width="70%">
+         <div id="content"></div>
+      </td>
+      <td valign="top" width="30%">
+         <div id="content-images"></div>
+      </td>
+   </tr>
+   <tr>
+      <td colspan="2">
+         <div id="content-biblio"></div>
+      </td>
+   </tr> 
+   </table>
 </div>
