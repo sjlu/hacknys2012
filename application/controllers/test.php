@@ -90,7 +90,13 @@ class Test extends CI_Controller {
         foreach( $bibliography as $key=>$val){
             print $key . "<br/>" . $val . "\n<br/>"; 
         }
-
+    
+        $imgs = $this->NYTimes->get_images();
+        foreach($imgs as $key=>$val){
+            foreach ($val as $img){
+                print "$key<br/><img src='$img' /><br/><br/>\n\n";
+            }
+        }
 
     }
 
