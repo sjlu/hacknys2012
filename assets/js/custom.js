@@ -114,6 +114,30 @@ function Interface_page () {
       $('#content-images').html(output);
    }
 
+   function write_statboxes(data)
+   {
+      // Get source count
+      var source_count = 0;
+      for (var source in data.bibliography)
+         source_count++;
+
+      // Get word count (hacked up)
+      var word_count = 0;
+      var words = data.beefed_essay.split(" ");
+      for (var i = 0; i < words.length; i++)
+      {
+         if (words[i] != "")
+            word_count++;
+      }
+
+      // Get loaded image count.
+      var image_count = document.images.length-5;
+      
+      $('#word-count').html(word_count);
+      $('#source-count').html(source_count);
+      $('#image-count').html(image_count);
+   }
+
    var exports = {};
    
    function load(data)
@@ -127,6 +151,7 @@ function Interface_page () {
       write_essay(data.beefed_essay);
       write_biblio(data.bibliography);
       write_images(data.images);
+      write_statboxes(data);
       //alert(data.bibliography);
 
       change_background();
