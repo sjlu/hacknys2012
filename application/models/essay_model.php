@@ -102,6 +102,8 @@ class Essay_Model extends CI_Model{
                         return $result;
                     }
                 }
+                print "parse.ly job timed out, more than " . $this->PARSELY_TIMEOUT_SECONDS . " seconds passed";
+                return false;
             }else{
                 print "parse.ly did not return a url to check job status";
                 print_r($result);
