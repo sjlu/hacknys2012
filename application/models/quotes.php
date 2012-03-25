@@ -51,6 +51,7 @@ class Quotes extends CI_Model {
         }
 
         foreach ($essay as $line_num => $line) {
+            if ($line_num == 0) continue;
             foreach ($topics as $topic) {
                 if (!isset($quotes[$topic])) continue;
                 if (strstr($line, $topic) != NULL) {
