@@ -25,8 +25,8 @@ class Quotes extends CI_Model {
             if ($count <= 2) {
                 $use_articles[$topic] = $articles;
             } else {
-                $rnd1 = array_splice($articles, rand(0, $count), 1);
-                $rnd2 = array_splice($articles, rand(0, $count - 1), 1);
+                $rnd1 = array_splice($articles, rand(0, $count - 1), 1);
+                $rnd2 = array_splice($articles, rand(0, $count - 2), 1);
                 $use_articles[$topic][] = $rnd1[0];
                 $use_articles[$topic][] = $rnd2[0];
             }
