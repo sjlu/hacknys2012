@@ -32,7 +32,11 @@ class API extends CI_Controller {
         $bibliography = $this->Bibliography->get_citations($articles);
         $sentences = $this->Sentence->tokenize($beefy_essay);
         $sentences = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
-        $cook_levels = self::get_beef_levels($input['cooked']);
+        if (array_key_exists('cooked',$input)){
+            $cook_levels = self::get_beef_levels($input['cooked']);
+        }else{
+            $cook_levels = self::get_beef_levels(2);
+        }
         $sentences = $this->Essay_Model->add_filler_sentences($parsely_articles, $sentences,$cook_levels[1]);
         $sentences = $this->Quotes->run($entities, $parsely_articles, $sentences,$cook_levels[0]);
         $sentences = implode(" ",$sentences);
