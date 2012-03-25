@@ -8,6 +8,7 @@ class Russtest extends CI_Controller {
         $test = array();
         $test[] = 'Steve Jobs';
         $test[] = 'Steve Wozniak';
+        $test[] = 'Obama';
 
         echo '<pre>';
         var_dump($this->NYTimes->get($test));
@@ -15,7 +16,6 @@ class Russtest extends CI_Controller {
 
         $images = $this->NYTimes->get_images();
 
-var_dump($images);
         foreach ($images as $topic) {
             foreach ($topic as $image) {
                 echo "<img src='$image' />";
