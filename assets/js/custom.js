@@ -102,7 +102,6 @@ function Interface_page () {
 
    function write_essay(html)
    {
-      /*
       var output = "";
       
       for (var line in html)
@@ -111,9 +110,8 @@ function Interface_page () {
       }
 
       $('#content').html(output);
-      */
 
-      $('#content').html(html);
+      //$('#content').html(html);
    }
 
    function write_biblio(data_array)
