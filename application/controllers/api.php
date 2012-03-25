@@ -21,10 +21,9 @@ class API extends CI_Controller {
         $bibliography = $this->Bibliography->get_citations($nytimes_articles);
 
         $return = array();
-
         $return['essay'] = $input['essay'];
 
-        return json_encode($return);
+        echo json_encode($return);
     }
 
 };
