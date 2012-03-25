@@ -36,7 +36,7 @@
          <div class="progress progress-striped progress-info active">
             <div class="bar" style="width: 100%;"></div>
          </div>
-         Loading... something...?
+         Grounding your beef...
       </div>
    </div>
 </div>

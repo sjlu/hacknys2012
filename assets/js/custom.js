@@ -89,11 +89,29 @@ function Interface_page () {
       for (inline in data_array)
       {
          if (data_array[inline].citation != undefined)
+         {
             output += data_array[inline].citation;
             output += "<br />";
+         }
       }
 
       $('#content-biblio').html(output);
+   }
+
+   function write_images(data_array)
+   {
+      var output = "";
+
+      var image;
+      for (image in data_array)
+      {
+         if (data_array[image][0] != undefined)
+         {
+            output += '<div class="image-holder"><img src="'+data_array[image][0]+'" class="image" alt="inline-image" onerror="this.parentNode.removeChild(this);" /></div>';
+         }
+      }
+
+      $('#content-images').html(output);
    }
 
    var exports = {};
@@ -108,6 +126,7 @@ function Interface_page () {
       // Writing HTML shit now
       write_essay(data.beefed_essay);
       write_biblio(data.bibliography);
+      write_images(data.images);
       //alert(data.bibliography);
 
       change_background();

@@ -141,3 +141,19 @@ textarea
 {
    margin: 20px auto 0;
 }
+
+#content-images
+{
+   margin-left: 20px;
+}
+
+.image-holder
+{
+   text-align: center;
+}
+
+.image
+{
+   border: 8px solid #fff;
+   margin-top: 10px;
+}
