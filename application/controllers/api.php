@@ -8,6 +8,7 @@ class API extends CI_Controller {
         $this->load->model('Bibliography');
         $this->load->model('NYTimes');
         $this->load->model('Sentence');
+        $this->load->model('Quotes');
 
         $input = json_decode($_POST['data'], true);
 
@@ -30,8 +31,9 @@ class API extends CI_Controller {
 
         $bibliography = $this->Bibliography->get_citations($articles);
         $sentences = $this->Sentence->tokenize($beefy_essay);
-       $beefy_essay = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
-       $beefy_essay = implode(" ",$beefy_essay);
+        $sentences = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
+        $sentences = $this->Quotes->run($entities, $parsely_articles, $sentences);
+        $beefy_essay = implode(" ",$sentences);
 
         $return = array();
         $return['essay'] = $input['essay'];
