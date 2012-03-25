@@ -86,7 +86,8 @@
       </td>
    </tr>
    <tr>
-      <td colspan="2">
+      <td colspan="2" style="padding-top: 20px">
+         <h3>Bibliography</h3>
          <div id="content-biblio"></div>
       </td>
    </tr> 

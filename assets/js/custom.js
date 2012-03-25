@@ -197,7 +197,7 @@ function Interface_page () {
       word_count = word_count - old_word_count;
 
       // Get loaded image count.
-      var image_count = document.images.length-5;
+      var image_count = document.images.length;
       
       $('#word-count').html("+"+word_count);
       $('#source-count').html(source_count);
