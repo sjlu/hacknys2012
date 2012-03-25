@@ -26,6 +26,7 @@ class NYTimes extends CI_Model {
                 preg_match("/(\s*[A-Z.]*\s*)*/", substr($by, 3), $matches);
                 $by = ucwords(strtolower($matches[0]));
                 $article['author'] = $by;
+                $article['publisher'] = "New York Times";
 
                 # probably the cooking just fucked up
                 if (strlen($by) < 5) continue;
