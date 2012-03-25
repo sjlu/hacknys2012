@@ -33,13 +33,13 @@ class API extends CI_Controller {
         $sentences = $this->Sentence->tokenize($beefy_essay);
         $sentences = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
         $sentences = $this->Essay_Model->add_filler_sentences($parsely_articles, $sentences,5);
-        $sentences = $this->Quotes->run($entities, $parsely_articles, $sentences);
-        $beefy_essay = implode(" ",$sentences);
+        $sentences = $this->Quotes->run($entities, $parsely_articles, $sentences,4);
+        //$beefy_essay = implode(" ",$sentences);
 
         $return = array();
         $return['essay'] = $input['essay'];
         $return['bibliography'] = $bibliography;
-        $return['beefed_essay'] = $beefy_essay;
+        $return['beefed_essay'] = $sentences;
         $return['images'] = $images;
 
 
