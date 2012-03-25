@@ -40,7 +40,7 @@ class Russtest extends CI_Controller {
 
         $inp = $this->Sentence->tokenize($input['essay']);
 
-        $output['essay'] = $this->Quotes->run($entities, $parsely_articles, $inp);
+        $output['essay'] = $this->Quotes->run($entities, $parsely_articles, $inp, 1);
 
         var_dump( $output['essay']);
     }
