@@ -77,15 +77,12 @@ class Test extends CI_Controller {
         var_dump($entities);
         $articles = $this->Parsely_Articles->get($entities);
         $ny_articles =  $this->NYTimes->get($entities);
+        $articles = array_merge_recursive($articles,$ny_articles);
         #print "Those gave us these articles:\n";
-        #var_dump($result);
+        //var_dump($articles);
         print "\n</pre>\n";
         print "generated this bibliography:<br/>";
         $bibliography = $this->Bibliography->get_citations($articles);
-        foreach( $bibliography as $key=>$val){
-            print $key . " - " . $val['in-text'] . "<br/>" . $val['citation'] . "\n<br/>"; 
-        }
-        $bibliography = $this->Bibliography->get_citations($ny_articles);
 
         foreach( $bibliography as $key=>$val){
             print $key . " - " . $val['in-text'] . "<br/>" . $val['citation'] . "\n<br/>"; 
@@ -97,6 +94,11 @@ class Test extends CI_Controller {
                 print "$key<br/><img src='$img' /><br/><br/>\n\n";
             }
         }
+
+        print "<br/>We got the output:<br/>\n";
+       print "<pre>\n"; 
+       print $this->Essay_Model->add_intext_citations($articles,$bibliography);
+       print "</pre>\n"; 
 
     }
 

@@ -26,13 +26,18 @@ class API extends CI_Controller {
 
         $images = $this->NYTimes->get_images();
 
-        $bibliography = $this->Bibliography->get_citations($nytimes_articles);
+        $bibliography = $this->Bibliography->get_citations($articles);
+
+        $essay_with_citations = $this->Essay_Model->add_intext_citations($articles,$bibliography);
 
         $return = array();
-
         $return['essay'] = $input['essay'];
+        $return['bibliography'] = $bibliography;
+        $return['essay_with_citations'] = $essay_with_citations;
+        $return['images'] = $images;
 
-        return json_encode($return);
+
+        echo json_encode($return);
     }
 
 };
