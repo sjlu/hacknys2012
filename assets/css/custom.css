@@ -159,6 +159,11 @@ textarea
    color: #cc0000;
 }
 
+.toolbar-statbox h2.green
+{
+   color: #699652;
+}
+
 .toolbar-statbox h4
 {
    color: #999;
@@ -199,5 +204,6 @@ textarea
 
 .new
 {
-   background-color: #699652;
+   color: #699652;
+   background-color: #d9ebc8;
 }
