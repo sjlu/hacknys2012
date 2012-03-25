@@ -60,7 +60,11 @@ var Loading_page = function () {
          {
             // creating an object to send to api
             var data_obj = {};
-            data_obj.essay = $('#essay-text').val();
+
+            if ($('#essay-text').val() == "")
+               data_obj.essay = $('#essay-text').attr('placeholder');
+            else
+               data_obj.essay = $('#essay-text').val();
 
             // ajax request
             run_ajax(data_obj);
