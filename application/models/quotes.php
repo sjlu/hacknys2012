@@ -38,6 +38,7 @@ class Quotes extends CI_Model {
             foreach ($articles as $article) {
                 $text = $this->Sentence->tokenize($article['full_content']);
                 foreach ($text as $line) {
+                    if ($line == "") return;
                     if ($line[0] == "[" or $line[0] == "]" or $line[0] == "(" or $line[0] == ")" or
                         $line[0] == "\"") {
                         continue;
