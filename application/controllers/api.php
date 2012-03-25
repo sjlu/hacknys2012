@@ -7,10 +7,12 @@ class API extends CI_Controller {
         $this->load->model('Parsely_Articles');
         $this->load->model('Bibliography');
         $this->load->model('NYTimes');
+        $this->load->model('Sentence');
 
         $input = json_decode($_POST['data'], true);
 
-        $entities = $this->Essay_Model->extract_entities($input['essay']);
+        $beefy_essay = $this->Essay_Model->get_parsley_text($input['essay']);
+        $entities = $this->Essay_Model->extract_entities($beefy_essay);
 
         $nytimes_articles = $this->NYTimes->get($entities);
         $parsely_articles = $this->Parsely_Articles->get($entities);
@@ -27,13 +29,13 @@ class API extends CI_Controller {
         $images = $this->NYTimes->get_images();
 
         $bibliography = $this->Bibliography->get_citations($articles);
-
-        $beefed_essay = $this->Essay_Model->add_intext_citations($articles,$bibliography);
+        $sentences = $this->Sentence->tokenize($beefy_essay);
+       $beefy_essay = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
 
         $return = array();
         $return['essay'] = $input['essay'];
         $return['bibliography'] = $bibliography;
-        $return['beefed_essay'] = $beefed_essay;
+        $return['beefed_essay'] = $beefy_essay;
         $return['images'] = $images;
 
 
