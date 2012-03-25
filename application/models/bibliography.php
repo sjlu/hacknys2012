@@ -45,7 +45,8 @@ class Bibliography extends CI_Model {
 
             $citation .= " Web.";
             $citation .= date(" d M Y"); 
-            $citation .= "<br/>&nbsp;&nbsp;&nbsp;&nbsp;<" . $topic['url'] . ">";
+            $citation .= "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;" . $topic['url'] . "&gt;";
+            $citation .= "<br/>\n";
 
             $return[$key] = $citation;
         }

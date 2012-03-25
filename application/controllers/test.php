@@ -9,7 +9,7 @@ class Test extends CI_Controller {
         $test[] = 'Steve Jobs';
         $test[] = 'Steve Wozniak';
 
-        echo '<pre>';
+        #echo '<pre>';
         var_dump($this->Parsely_Articles->get($test));
     }
 
@@ -17,8 +17,9 @@ class Test extends CI_Controller {
         $this->load->model('Essay_Model');
         $this->load->model('Parsely_Articles');
         $this->load->model('Bibliography');
+        $this->load->model('NYTimes');
 
-        echo '<pre>';
+        print '<pre>';
         $entities = $this->Essay_Model->extract_entities("
         Polls opened across Louisiana at 7 a.m. EDT and will remain open until 9 p.m. EDT. Just 20 of the state’s delegates are at stake and will be allocated proportionally among candidates earning more than 25 percent of the vote. If no candidate earns above 25 percent, the delegates will remain uncommitted. An additional 23 delegates will be selected at the state Republican convention in June.
         
@@ -74,15 +75,21 @@ class Test extends CI_Controller {
         ",5);
         print "We got these entities:\n";
         var_dump($entities);
-        $result = $this->Parsely_Articles->get($entities);
-        print "Those gave us these articles:\n";
-        var_dump($result);
-        echo "</pre>";
+        $articles = $this->Parsely_Articles->get($entities);
+        $ny_articles =  $this->NYTimes->get($entities);
+        #print "Those gave us these articles:\n";
+        #var_dump($result);
+        print "\n</pre>\n";
         print "generated this bibliography:<br/>";
-        $bibliography = $this->Bibliography->get_citations($result);
-        var_dump($bibliography);
+        $bibliography = $this->Bibliography->get_citations($articles);
+        foreach( $bibliography as $key=>$val){
+            print $key . "<br/>" . $val . "\n<br/>"; 
+        }
+        $bibliography = $this->Bibliography->get_citations($ny_articles);
 
-
+        foreach( $bibliography as $key=>$val){
+            print $key . "<br/>" . $val . "\n<br/>"; 
+        }
 
 
     }
