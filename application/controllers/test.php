@@ -16,6 +16,7 @@ class Test extends CI_Controller {
     function entities () {
         $this->load->model('Essay_Model');
         $this->load->model('Parsely_Articles');
+        $this->load->model('Bibliography');
 
         echo '<pre>';
         $entities = $this->Essay_Model->extract_entities("
@@ -77,6 +78,11 @@ class Test extends CI_Controller {
         print "Those gave us these articles:\n";
         var_dump($result);
         echo "</pre>";
+        print "generated this bibliography:<br/>";
+        $bibliography = $this->Bibliography->get_citations($result);
+        var_dump($bibliography);
+
+
 
 
     }
