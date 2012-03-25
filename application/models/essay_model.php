@@ -16,7 +16,7 @@ class Essay_Model extends CI_Model{
                 "While not initially obvious, careful analysis shows this reveals much of the true depth behind %s.",
                 "Clearly, %s is subtle and complex. The following paragraphs attempt to explain in further detail.",
                 "This was one of the most important and influential events to influence %s.",
-                "Despite its seeminly simple manifestation, the importance of this cannot be overstated." ,
+                "Despite its seemingly simple manifestation, the importance of this cannot be overstated." ,
                 "%s made considerable gains. In the following, it will be shown how that is largely due to this influence.",
                 "Despite the fact that such an event may appear entirely unexpected, it is fully explainable and predictable given existing theories.",
                 "Many experts argue that %s could be one of the largest influences of the century, and as such the importance cannot be overstated.",
@@ -34,7 +34,7 @@ class Essay_Model extends CI_Model{
                 "%s had such a great impact that even the most expert of experts could not fully grasp the level of greatness in context. In other  words, %s was pretty great.",
                 "%s's conception was foretold by a swallow, and heralded by the appearance of a double rainbow across the sky over the mountain with a new star in the heavens.",
                 "At times, bringing up %s was known to lay cause for a spontaneous disrobing of the fairer gender.",
-                "In west Philadelphia, born and raised.. is where %s would spend most days.",
+                "In west Philadelphia, born and raised. Is where %s would spend most days.",
                 "%s's arrival as a harbringer of great news was fleeting at the moment someone decided to save 15 per-cent or more on their car insurance by switching to Geico."
                );
         //get random template
