@@ -5,8 +5,8 @@
       </div>
 
       <div class="infobox" id="infobox-1">
-         <h3>What we provide</h3>
-         This box contains a bunch of text which has a bunch of text and more text blah blah blah blah blah blah blah 
+         <h3>Beef-ify your essay!</h3>
+         Paste your essay into the box to beef it up. Our specially trained cows will automagically find sources, insert quotes, citations, and filler statements as well as building a bibliography and finding images!
       </div>
 
       <div class="infobox" id="infobox-2">
