@@ -11,6 +11,28 @@ class Essay_Model extends CI_Model{
         parent::__construct();
     }
 
+    public function get_filler_sentence($keyword){
+        $filler_templates = array(
+                "While not initially obvious, careful analysis shows this reveals much of the true depth behind %s.",
+                "Clearly, %s is subtle and complex. The following paragraphs attempt to explain in further detail.",
+                "This was one of the most important and influential events to influence %s.",
+                "Despite its seeminly simple manifestation, the importance of this cannot be overstated." ,
+                "%s made considerable gains. In the following, it will be shown how that is largely due to this influence.",
+                "Despite the fact that such an event may appear entirely unexpected, it is fully explainable and predictable given existing theories.",
+                "Many experts argue that %s could be one of the largest influences of the century, and as such the importance cannot be overstated.",
+                "Following this train of thought to its logical conclusion leads to frightening ramifications.",
+                "This exemplifies both the strength and weaknesses of %s, and as such is an important issue to study.",
+                "The issues surrounding %s have been an area of extreme interest for some time, and while much work has been done, many questions have yet to be answered.",
+                "Therefore, it can be argued that %s has been entirely misunderstood. In fact, the common and popular opinion has laboured under misconceptions about %s for some time.",
+                "Public opinion showed a distinct and unmistable response for %s in light of this.",
+                "The study of %s, always a topic of ample interest, was elevated to colossal proportions as a result."
+               );
+        //get random template
+        $template = $filler_templates[array_rand($filler_templates)];
+        return sprintf($template,$keyword);
+
+    }
+
     public function add_intext_citations($articles,$bibliography){
         $text_with_citations = $this->text_with_entities;
         //insert all the citations we have
