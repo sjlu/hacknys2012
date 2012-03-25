@@ -14,8 +14,14 @@ class Parsely_Articles extends CI_Model {
 
         foreach ($topics as $topic) {
             $data = $this->simon_call($topic);
+            $ret = array();
 
-            $return[$topic] = $data;
+            foreach ($data as $article) {
+                $article['publisher'] = ucwords($article['publisher']);
+                $ret[] = $article;
+            }
+
+            $return[$topic] = $ret;
         }
 
         return $return;
