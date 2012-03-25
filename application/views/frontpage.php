@@ -36,7 +36,7 @@
          <div class="progress progress-striped progress-info active">
             <div class="bar" style="width: 100%;"></div>
          </div>
-         Loading... something...?
+         Grounding your beef...
       </div>
    </div>
 </div>
@@ -44,6 +44,26 @@
 <div id="page-interface" style="display: none;">
    <div id="topbar">
       <div id="topbar-container">
+         <div id="topbar-toolbar">
+            <div id="toolbar-slider">
+            </div>
+
+            <div class="toolbar-statbox">
+               <h4>Word Count</h4>
+               <h2 id="word-count"></h2>
+            </div>
+
+            <div class="toolbar-statbox">
+               <h4>Sources Count</h4>
+               <h2 id="source-count"></h2>
+            </div>
+
+            <div class="toolbar-statbox">
+               <h4>Image Count</h4>
+               <h2 id="image-count"></h2>
+            </div>
+         </div>
+
          <div id="topbar-logo">
             <img src="<?= base_url('assets/img/interface-logo.png') ?>" alt="topbar-logo" />
          </div>

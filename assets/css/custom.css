@@ -116,13 +116,52 @@ textarea
 {
    width: 940px;
    margin: 0 auto;
+   padding-left: 20px;
 }
 
 #topbar-logo
 {
+   display: inline-block;
    float: right; 
    width: 198px;
    height: 150px;
+}
+
+#topbar-toolbar
+{
+   display: inline-block;
+   width: 700px;
+   float: left;
+}
+
+#toolbar-slider
+{
+   width: 700px;
+   height: 50px;
+}
+
+.toolbar-statbox
+{
+   display: inline-block;
+   width: 200px;
+   height: 50px;
+   padding: 14px 10px;
+
+   text-align: center;
+
+   border: 1px solid #eee;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+}
+
+.toolbar-statbox h2
+{
+   color: #cc0000;
+}
+
+.toolbar-statbox h4
+{
+   color: #999;
 }
 
 #content-container
@@ -140,4 +179,20 @@ textarea
 #content-biblio
 {
    margin: 20px auto 0;
+}
+
+#content-images
+{
+   margin-left: 20px;
+}
+
+.image-holder
+{
+   text-align: center;
+}
+
+.image
+{
+   border: 8px solid #fff;
+   margin-top: 10px;
 }
