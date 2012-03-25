@@ -13,6 +13,12 @@ class API extends CI_Controller {
         $input = json_decode($_POST['data'], true);
 
         $beefy_essay = $this->Essay_Model->get_parsley_text($input['essay']);
+        if (! $beefy_essay){
+            return json_encode(array(
+                'error' => 'The parse.ly job timed out'
+            ));
+        }
+
         $entities = $this->Essay_Model->extract_entities($beefy_essay);
 
         $nytimes_articles = $this->NYTimes->get($entities);
@@ -32,8 +38,13 @@ class API extends CI_Controller {
         $bibliography = $this->Bibliography->get_citations($articles);
         $sentences = $this->Sentence->tokenize($beefy_essay);
         $sentences = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
-        $sentences = $this->Essay_Model->add_filler_sentences($parsely_articles, $sentences,5);
-        $sentences = $this->Quotes->run($entities, $parsely_articles, $sentences,4);
+        if (array_key_exists('cooked',$input)){
+            $cook_levels = self::get_beef_levels($input['cooked']);
+        }else{
+            $cook_levels = self::get_beef_levels(2);
+        }
+        $sentences = $this->Essay_Model->add_filler_sentences($parsely_articles, $sentences,$cook_levels[1]);
+        $sentences = $this->Quotes->run($entities, $parsely_articles, $sentences,$cook_levels[0]);
         $sentences = implode(" ",$sentences);
         $return = array();
         $return['essay'] = $input['essay'];
@@ -43,6 +54,25 @@ class API extends CI_Controller {
 
 
         echo json_encode($return);
+    }
+
+    public function get_beef_levels($cooked_level){
+        switch($cooked_level){
+            case 0;
+                return array (9,2);
+            case 1:
+                return array (7,3);
+            case 2:
+                return array (5,5);
+            case 3:
+                return array (4,6);
+            case 4:
+                return array (3,8);
+            
+            case 5: //fall through
+            default :
+                return array(2,10);
+        } 
     }
 
 };

@@ -95,12 +95,14 @@ textarea
    background-color: rgba(0,0,0,0.5);
    padding: 20px;
    font-size: 22px; 
+   line-height: 24px;  
    color: #fff; 
    text-shadow: 0px 2px 3px #171717;
             
    -webkit-border-radius: 10px;
    -moz-border-radius: 10px;
 }
+
 
 /*
  * Everything dealing with interface_page
@@ -136,8 +138,9 @@ textarea
 
 #toolbar-slider
 {
-   width: 700px;
-   height: 50px;
+   width: 660px;
+   padding: 20px 0 0 40px;
+   height: 30px;
 }
 
 .toolbar-statbox
@@ -200,10 +203,55 @@ textarea
 {
    border: 8px solid #fff;
    margin-top: 10px;
+   max-width: 250px;
 }
 
 .new
 {
    color: #699652;
    background-color: #d9ebc8;
+}
+
+.slider {
+   width:600px;
+   height:6px;
+   background:url(../img/slider-bg.png);
+   position:relative;
+   margin:0;
+}
+
+.ui-slider-handle {
+   width:20px;
+   height:20px;
+   position:absolute;
+   top:-7px;
+   margin-left:-12px;
+   z-index:200;
+   background:url(../img/slider-button.png);
+}
+
+.ui-widget-header {
+   background:url(../img/slider-fill.png) no-repeat left;
+   height:6px;
+   left:0px;
+   top:0px;
+   position:absolute;
+}
+
+#loading-indicator-container
+{
+   text-align: center;
+   font-size: 20px; 
+   line-height: 24px;  
+}
+
+#loading-indicator-small
+{
+   width: 68px;
+   margin: 100px auto;
+}
+
+#beef-label
+{
+   font-size: 14px;
 }

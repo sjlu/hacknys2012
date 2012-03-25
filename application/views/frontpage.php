@@ -5,8 +5,8 @@
       </div>
 
       <div class="infobox" id="infobox-1">
-         <h3>What we provide</h3>
-         This box contains a bunch of text which has a bunch of text and more text blah blah blah blah blah blah blah 
+         <h3>Beef-ify your essay!</h3>
+         Paste your essay into the box to beef it up. Our specially trained cows will automagically find sources, insert quotes, citations, and filler statements as well as building a bibliography and finding images!
       </div>
 
       <div class="infobox" id="infobox-2">
@@ -25,7 +25,7 @@
    </div>
 
    <div id="actions">
-      <button class="btn btn-large btn-primary" id="continue-btn">Beef Up My Essay</button>
+      <button class="btn btn-large btn-primary" id="continue-btn">Sizzle My Beef</button>
    </div>
 </div>
 
@@ -46,6 +46,7 @@
       <div id="topbar-container">
          <div id="topbar-toolbar">
             <div id="toolbar-slider">
+               <div id="beef-slider" class="slider"></div>
             </div>
 
             <div class="toolbar-statbox">
@@ -69,7 +70,12 @@
          </div>
       </div>
    </div>
-   
+  
+   <div class="centered" id="loading-indicator-container" style="display: none;">
+      <div id="loading-indicator-small"></div><br /><br />
+      <span id="beef-label" class="label label-warning">Medium Rare</span>
+   </div>
+
    <table border="0" id="content-container">
    <tr>
       <td valign="top" width="70%">
