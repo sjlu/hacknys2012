@@ -25,13 +25,23 @@ class Bibliography extends CI_Model {
                 //move last name to front, put comma (assumes only 1 author) 
                 $names =  preg_split('/\s+/', $topic['author']);
                 if( count($names) >1){
-                    $citation .= end($names) . ",";
-                    for ($i = count($names) - 2; $i >= 0; $i--) {
-                        $citation .= " $names[$i]"; 
+                    $rev =  array_reverse($names);
+                    $last = array_shift($rev);
+                    while (! preg_match("/[a-z|A-Z]/",$last )){
+                        $last = array_shift($rev); 
+                    }
+                    $citation .= $last . ",";
+
+                    if(($replace_key= array_search($last, $names)) !== false)
+                    {
+                        unset($names[$replace_key]);
+                    }
+                    foreach($names as $name){
+                        $citation .= " $name"; 
                     }
                     $citation .= ". ";
-                    $in_text = "(" . end($names) . ")";
-                }else{
+                    $in_text = "(" . $last . ")";
+                }else if ( preg_match("/[a-z|A-Z]/",$topic['author'])){
                     //only 1 name, put it straight out
                     $citation .=  $topic['author'];
                     $citation .= ". ";
