@@ -42,7 +42,7 @@ class Russtest extends CI_Controller {
 
         $output['essay'] = $this->Quotes->run($entities, $parsely_articles, $inp);
 
-        echo $output['essay'];
+        var_dump( $output['essay']);
     }
 
     function sentence () {

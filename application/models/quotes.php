@@ -53,10 +53,11 @@ class Quotes extends CI_Model {
 
         foreach ($essay as $line_num => $line) {
             foreach ($topics as $topic) {
+                if (!isset($quotes[$topic])) continue;
                 if (strstr($line, $topic) != NULL) {
-                    $rnd = rand(0, 2);
+                    $rnd = rand(1, 1);
                     if ($rnd == 1) {
-                        $rnd_quote = rand(0, count($quotes[$topic]));
+                        $rnd_quote = rand(0, count($quotes[$topic]) - 1);
                         array_splice($essay, $line_num, 0, $quotes[$topic][$rnd_quote]);
                     }
                 }
@@ -69,7 +70,7 @@ class Quotes extends CI_Model {
     function format ($author, $publication, $quote) {
         $templates = array(
             'As #{AUTHOR} of #{PUBLICATION} says, "#{QUOTE}"',
-            'Of course, "#{QUOTENOPERIOD}" as #{AUTHOR} of #{PUBLICATION} says.',
+            'Of course, "#{QUOTENOPERIOD}" says #{AUTHOR} of #{PUBLICATION}.',
             '#{AUTHOR} of #{PUBLICATION} states "#{QUOTE}"',
             '#{AUTHOR} of #{PUBLICATION} says "#{QUOTE}"',
             'As said by #{AUTHOR} of #{PUBLICATION}, "#{QUOTE}"',
