@@ -94,6 +94,7 @@ class Essay_Model extends CI_Model{
                     if ($job_result['status'] === "WORKING"){
                         sleep($seconds_to_sleep);
                         $seconds_waited += $seconds_to_sleep;
+                        syslog(LOG_ERR,"waited for $seconds_waited");
                     }else{
                         // done working, it should return the extracted entities 
                         $result = preg_replace("/---NEWLINE---/","<br/>",$job_result['data']);
@@ -105,11 +106,13 @@ class Essay_Model extends CI_Model{
                 print "parse.ly job timed out, more than " . $this->PARSELY_TIMEOUT_SECONDS . " seconds passed";
                 return false;
             }else{
+                syslog(LOG_ERR,"Parse.ly did not return url to check job status, exiting");
                 print "parse.ly did not return a url to check job status";
                 print_r($result);
                 return false; 
             }
         }else{
+                syslog(LOG_ERR,"Parse.ly post failed");
             print "parse.ly post failed";
             var_dump($result);
             return false;
@@ -120,6 +123,7 @@ class Essay_Model extends CI_Model{
     public function extract_entities($parsely_text, $num_entities=5){
         if(! $parsely_text){ 
             print "input text was empty";
+                syslog(LOG_ERR,"input text was empty");
             return false;
         }else{
             $this->text_with_entities=$parsely_text;
