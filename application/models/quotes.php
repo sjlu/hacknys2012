@@ -3,7 +3,7 @@
 class Quotes extends CI_Model {
 
     # inserts quotes
-    function run ($topics, $input_articles, $essay) {
+    function run ($topics, $input_articles, $essay, $chance) {
         $this->load->model('Essay_Model');
         $this->load->model('Sentence');
 
@@ -55,7 +55,7 @@ class Quotes extends CI_Model {
             foreach ($topics as $topic) {
                 if (!isset($quotes[$topic])) continue;
                 if (strstr($line, $topic) != NULL) {
-                    $rnd = rand(1, 1);
+                    $rnd = rand(0, $chance);
                     if ($rnd == 1) {
                         $rnd_quote = rand(0, count($quotes[$topic]) - 1);
                         array_splice($essay, $line_num, 0, $quotes[$topic][$rnd_quote]);
