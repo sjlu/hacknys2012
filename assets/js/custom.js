@@ -329,4 +329,8 @@ $(document).ready(function()
       title: 'Slide for Tenderness',
       delay: { show: 500, hide: 1000 }
    });
+
+   $('textarea').click(function () {
+       $(this).val('');
+   });
 });
