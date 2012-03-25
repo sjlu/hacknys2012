@@ -20,7 +20,7 @@ class Quotes extends CI_Model {
         $use_articles = array();
 
         foreach ($possible_articles as $topic => $articles) {
-            $count = count($topics);
+            $count = count($articles);
 
             if ($count <= 2) {
                 $use_articles[$topic] = $articles;
