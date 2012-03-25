@@ -31,6 +31,7 @@ class API extends CI_Controller {
         $bibliography = $this->Bibliography->get_citations($articles);
         $sentences = $this->Sentence->tokenize($beefy_essay);
        $beefy_essay = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
+       $beefy_essay = implode(" ",$beefy_essay);
 
         $return = array();
         $return['essay'] = $input['essay'];
