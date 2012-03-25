@@ -5,12 +5,21 @@ class Essay_Model extends CI_Model{
     private $PARSELY_TIMEOUT_SECONDS = 20;
     private $PARSELY_API_ROOT = "http://hack.parsely.com";
     private $entities;
+    private $text_with_entities;
 
     public function Essay_Model(){
         parent::__construct();
     }
 
-    public function extract_entities($essay_text, $num_entities=5){
+    public function add_intext_citations($articles,$bibliography){
+        foreach ($articles as $keyword){
+            //everywhere we see $keyword </TOPIC>, replace with the in-text citation
+            //    $text_with_citations 
+
+        }
+    }
+
+    public function get_parsley_text($essay_text){
         //post the essay to parse.ly
         $url = $this->PARSELY_API_ROOT . "/parse";
         $result = self::post($url,array('text'=>$essay_text, 'wiki_filter' => 'false'));
@@ -23,40 +32,49 @@ class Essay_Model extends CI_Model{
                 $seconds_waited = 0;      
                 $seconds_to_sleep = 1;
                 while ($seconds_waited <= $this->PARSELY_TIMEOUT_SECONDS){
-                   $job_result = file_get_contents($this->PARSELY_API_ROOT . $result['url']);
-                   $job_result = json_decode($job_result,true);
-                   //if not done yet, wait a second and ask again
-                   if ($job_result['status'] === "WORKING"){
+                    $job_result = file_get_contents($this->PARSELY_API_ROOT . $result['url']);
+                    $job_result = json_decode($job_result,true);
+                    //if not done yet, wait a second and ask again
+                    if ($job_result['status'] === "WORKING"){
                         sleep($seconds_to_sleep);
                         $seconds_waited += $seconds_to_sleep;
                     }else{
                         // done working, it should return the extracted entities 
-                        $text_with_entities = $job_result['data'];
-                        //now, we have to extract and count all the entities
-                        preg_match_all("/<TOPIC>(.*?)<\/TOPIC>/",$text_with_entities,$all_entities,PREG_PATTERN_ORDER);
-                        $this->entities = array();
-                        foreach($all_entities[1] as $entity){
-                           if(array_key_exists($entity,$this->entities)){
-                                $this->entities[$entity]++; 
-                           }else{
-                                $this->entities[$entity] = 1; 
-                           }
-                       }
-                       array_multisort($this->entities,SORT_DESC);
-                       return array_keys(array_slice($this->entities,0,$num_entities));
-
+                        return $job_result['data'];
                     }
                 }
-            //result['url'] is false
             }else{
-                return $result; 
+                print "parse.ly did not return a url to check job status";
+                return false; 
             }
-        //post returned false
         }else{
-            return "post to $url failed!";
-            //error!
+            print "parse.ly post failed";
+            return false;
         }
 
+    }
+
+    public function extract_entities($essay_text, $num_entities=5){
+        $parsely_text = $this->get_parsley_text($essay_text);
+        if(! $parsely_text){ 
+            return false;
+        }else{
+            $this->text_with_entities=$parsely_text;
+
+            //now, we have to extract and count all the entities
+            preg_match_all("/<TOPIC>(.*?)<\/TOPIC>/",$this->text_with_entities,$all_entities,PREG_PATTERN_ORDER);
+            $this->entities = array();
+            foreach($all_entities[1] as $entity){
+                if(array_key_exists($entity,$this->entities)){
+                    $this->entities[$entity]++; 
+                }else{
+                    $this->entities[$entity] = 1; 
+                }
+            }
+            array_multisort($this->entities,SORT_DESC);
+            return array_keys(array_slice($this->entities,0,$num_entities));
+
+        }
     }
 
     private function post($url,$fields){

@@ -83,12 +83,12 @@ class Test extends CI_Controller {
         print "generated this bibliography:<br/>";
         $bibliography = $this->Bibliography->get_citations($articles);
         foreach( $bibliography as $key=>$val){
-            print $key . "<br/>" . $val . "\n<br/>"; 
+            print $key . " - " . $val['in-text'] . "<br/>" . $val['citation'] . "\n<br/>"; 
         }
         $bibliography = $this->Bibliography->get_citations($ny_articles);
 
         foreach( $bibliography as $key=>$val){
-            print $key . "<br/>" . $val . "\n<br/>"; 
+            print $key . " - " . $val['in-text'] . "<br/>" . $val['citation'] . "\n<br/>"; 
         }
     
         $imgs = $this->NYTimes->get_images();

@@ -18,6 +18,8 @@ class Bibliography extends CI_Model {
             $topic = $entity[array_rand($entity)];
             //required fields:    title, publisher, url
             //additional possible fields: author_first,author_last, pub_date , issue_num
+
+            $in_text = '("' . $topic['publisher'] . '")';
             $citation = "";
             if(array_key_exists('author',$topic)){
                 //move last name to front, put comma (assumes only 1 author) 
@@ -28,10 +30,12 @@ class Bibliography extends CI_Model {
                         $citation .= " $names[$i]"; 
                     }
                     $citation .= ". ";
+                    $in_text = "(" . end($names) . ")";
                 }else{
                     //only 1 name, put it straight out
                     $citation .=  $topic['author'];
                     $citation .= ". ";
+                    $in_text = "(" . $topic['author'] . ")";
                 }
             }
             $citation .= sprintf("\"%s\" <i>%s</i>", $topic['title'], $topic['publisher']);
@@ -48,9 +52,8 @@ class Bibliography extends CI_Model {
             $citation .= "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;" . $topic['url'] . "&gt;";
             $citation .= "<br/>\n";
 
-            $return[$key] = $citation;
+            $return[$key] = array('in-text'=> $in_text, 'citation' => $citation);
         }
-
         return $return;
     }
 
