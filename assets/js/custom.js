@@ -73,9 +73,12 @@ var Loading_page = function () {
       function rotate_fact()
       {
          var facts = [
-            "The U.S. beef industry is made up of more than 1 million businesses, farms and ranches.",
-            "In 2007, there were 97 million cattle in the United States.",
-            "In 2007, 26.4 billion pounds of beef were produced."
+            "A cow that weighs 1000 pounds will make a carcass weighing about 615 pounds. The carcass makes about 432 pounds of meat.",
+            "Beef fat, called tallow, is an ingredient in soaps, cosmetics, candles, shortenings, and chewing gum.",
+            "Many medicines, including insulin and estrogen, are made from the glands of the cow.",
+            "Consumer beef spending has grown $14 billion compared to the 1990s according to CattleFax.",
+            "It was decreed by law in the Roman Empire that all young maidens be fed rabbit meat because it would make them more beautiful and more willing.",
+            "In 2012, over 32.5 billions tons of beef were shipped to the Courant Institute at NYU during Start-up Week. This fact is also completely false."
          ];
       
          var rand = Math.floor(Math.random() * facts.length);
@@ -94,6 +97,26 @@ var Loading_page = function () {
  */
 function Interface_page () {
    
+   function run_ajax (data) {
+      $.ajax({
+         url: 'index.php/api',
+         type: 'POST',
+         async: true,
+         dataType: 'json',
+         timeout: 25000,
+         data: {data: JSON.stringify(data)},
+         success: function(data)
+         {
+            //parsing response from api
+            //alert(data.essay);
+            $('#loading-indicator-container').fadeOut(function()
+            {
+               interface_page.load(data);
+            });
+         }
+      });
+   }
+
    function change_background()
    {
       $('body').css('background','#eaeaea');
@@ -199,9 +222,21 @@ function Interface_page () {
 
       change_background();
       $('#page-interface').fadeIn();
-      
+      $('#content-container').fadeIn(); 
    }
    exports.load = load;
+   
+   function do_reload()
+   {
+      var data_obj = {};
+      data_obj.essay = $('#essay-text').val();
+      data_obj.cooked = $('#beef-slider').val();
+      
+      $('#content-container').fadeOut();
+      $('#loading-indicator-container').fadeIn();
+      run_ajax(data_obj);
+   }
+   exports.do_reload = do_reload;
 
    return exports;
 }
@@ -226,4 +261,32 @@ $(document).ready(function()
    {
       front_page.continue_click();
    });
+
+   $('.slider').slider({
+      animate: true,
+      range: "min",
+      value: 4,
+      min: 0,
+      max: 4,
+      //step: 1,
+      slide: function(event, ui) {
+         $("#slider-result").html(ui.value);
+         // change tooltip here.
+      },
+      change: function(event, ui) {
+         $("#hidden").attr('value', ui.value);
+         interface_page.do_reload();
+         // do post values here.
+      }
+   });
+
+   $('#loading-indicator-small').activity({
+      segments: 12, 
+      width: 5.5, 
+      space: 6, 
+      length: 13, 
+      color: '#252525', 
+      speed: 1.5
+   });
+
 });

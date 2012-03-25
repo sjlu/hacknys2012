@@ -13,6 +13,7 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
    <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
+   <script src="<?= base_url('assets/js/jquery.activity-indicator-1.0.0.min.js') ?>"></script>
    <script src="<?= base_url('assets/js/custom.js') ?>"></script>
 
    <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" />

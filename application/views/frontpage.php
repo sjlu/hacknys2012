@@ -25,7 +25,7 @@
    </div>
 
    <div id="actions">
-      <button class="btn btn-large btn-primary" id="continue-btn">Beef Up My Essay</button>
+      <button class="btn btn-large btn-primary" id="continue-btn">Sizzle My Beef</button>
    </div>
 </div>
 
@@ -46,6 +46,7 @@
       <div id="topbar-container">
          <div id="topbar-toolbar">
             <div id="toolbar-slider">
+               <div id="beef-slider" class="slider"></div>
             </div>
 
             <div class="toolbar-statbox">
@@ -69,7 +70,11 @@
          </div>
       </div>
    </div>
-   
+  
+   <div class="centered" id="loading-indicator-container" style="display: none">
+      <div id="loading-indicator-small"></div>
+   </div>
+
    <table border="0" id="content-container">
    <tr>
       <td valign="top" width="70%">
