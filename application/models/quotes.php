@@ -4,7 +4,6 @@ class Quotes extends CI_Model {
 
     # inserts quotes
     function run ($topics, $input_articles, $essay, $chance) {
-        return $essay;
         $this->load->model('Sentence');
 
         $possible_articles = array();
@@ -38,7 +37,7 @@ class Quotes extends CI_Model {
             foreach ($articles as $article) {
                 $text = $this->Sentence->tokenize($article['full_content']);
                 foreach ($text as $line) {
-                    if ($line == "") return;
+                    if ($line == "") continue;
                     if ($line[0] == "[" or $line[0] == "]" or $line[0] == "(" or $line[0] == ")" or
                         $line[0] == "\"") {
                         continue;
@@ -58,7 +57,8 @@ class Quotes extends CI_Model {
                     $rnd = rand(0, $chance);
                     if ($rnd == 1) {
                         $num = rand(0, count($quotes[$topic]) - 1);
-                        $rnd_quote = "<span class=\"new beefquote\">" . $quotes[$topic][$num] . "</span>";
+                        $thequote = array_splice($quotes[$topic], $num, 1);
+                        $rnd_quote = "<span class=\"new beefquote\">" . $thequote[0] . "</span>";
                         array_splice($essay, $line_num, 0, $rnd_quote);
                     }
                 }
