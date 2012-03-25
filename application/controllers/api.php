@@ -13,6 +13,12 @@ class API extends CI_Controller {
         $input = json_decode($_POST['data'], true);
 
         $beefy_essay = $this->Essay_Model->get_parsley_text($input['essay']);
+        if (! $beefy_essay){
+            return json_encode(array(
+                'error' => 'The parse.ly job timed out'
+            ));
+        }
+
         $entities = $this->Essay_Model->extract_entities($beefy_essay);
 
         $nytimes_articles = $this->NYTimes->get($entities);
