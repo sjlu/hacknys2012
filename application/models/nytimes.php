@@ -5,7 +5,7 @@ class NYTimes extends CI_Model {
     private $images = array();
 
     function api_call ($query) {
-        $base = 'http://api.nytimes.com/svc/search/v1/article/?api-key=2be1ef573e3ae5ec814fb660c9d01dfb:1:65860901&fields=byline,author,title,url,date,small_image_url&query=title:';
+        $base = 'http://api.nytimes.com/svc/search/v1/article/?api-key=2be1ef573e3ae5ec814fb660c9d01dfb:1:65860901&fields=body,byline,author,title,url,date,small_image_url&query=title:';
         $url = $base . urlencode($query);
         $data = json_decode(file_get_contents($url), TRUE);
         return $data['results'];
@@ -27,6 +27,7 @@ class NYTimes extends CI_Model {
                 $by = ucwords(strtolower($matches[0]));
                 $article['author'] = $by;
                 $article['publisher'] = "New York Times";
+                $article['full_content'] = $article['body'];
 
                 # probably the cooking just fucked up
                 if (strlen($by) < 5) continue;

@@ -14,7 +14,15 @@ class API extends CI_Controller {
 
         $nytimes_articles = $this->NYTimes->get($entities);
         $parsely_articles = $this->Parsely_Articles->get($entities);
-        $articles = array_merge($nytimes_articles, $parsely_articles);
+        $articles = $nytimes_articles;
+
+        # ugly array merge
+        foreach ($articles as $topic => $actual_articles) {
+            if (isset($parsely_articles[$topic])) {
+                $articles[$topic] = array_merge(
+                    $actual_articles, $parsely_articles[$topic]);
+            }
+        }
 
         $images = $this->NYTimes->get_images();
 
