@@ -33,17 +33,25 @@ class Essay_Model extends CI_Model{
 
     }
 
-    public function add_intext_citations($articles,$bibliography){
-        $text_with_citations = $this->text_with_entities;
-        //insert all the citations we have
-        foreach ($articles as $keyword => $val){
-            //everywhere we see $keyword </TOPIC>, replace with the in-text citation
-            $citation_obj = $bibliography[$keyword];
-            $text_with_citations = preg_replace("/$keyword.*?<\/TOPIC>/",$keyword . " " . $citation_obj['in-text'], $text_with_citations);
+    public function add_intext_citations($articles,$bibliography,$sentences){
+        $return = array();        
+        foreach ($sentences as $sentence){ 
+            //insert all the citations we have
+            foreach ($articles as $keyword => $val){
+                //everywhere we see $keyword </TOPIC>, replace with the in-text citation
+                $citation_obj = $bibliography[$keyword];
+                //if this sentence has this keywork, add a citation at the end (and only one)
+                if( preg_match("/$keyword.*?<\/TOPIC>/", $sentence)){
+                    $sentence .= " " . $citation_obj['in-text']; 
+                    break;
+                }
+            }
+            //just remove all other <TOPIC> stuff
+            $sentence = preg_replace("/<.*?TOPIC>/",'', $sentence);
+            $return[] = $sentence;
+
         }
-        //just remove all other <TOPIC> stuff
-        $text_with_citations = preg_replace("/<.*?TOPIC>/",'', $text_with_citations);
-        return $text_with_citations;
+        return $return;
     }
 
     public function get_parsley_text($essay_text){
@@ -68,7 +76,7 @@ class Essay_Model extends CI_Model{
                         $seconds_waited += $seconds_to_sleep;
                     }else{
                         // done working, it should return the extracted entities 
-                        $result = preg_replace("/---NEWLINE---/","\n",$job_result['data']);
+                        $result = preg_replace("/---NEWLINE---/","<br/>",$job_result['data']);
                         $result = preg_replace("/ ,/",",",$result);
                         $result = preg_replace("/ '/","'",$result);
                         $result = preg_replace("/ \"/","\"",$result);
@@ -89,8 +97,7 @@ class Essay_Model extends CI_Model{
 
     }
 
-    public function extract_entities($essay_text, $num_entities=5){
-        $parsely_text = $this->get_parsley_text($essay_text);
+    public function extract_entities($parsely_text, $num_entities=5){
         if(! $parsely_text){ 
             return false;
         }else{

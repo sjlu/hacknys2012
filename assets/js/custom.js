@@ -37,7 +37,11 @@ function Loading_page () {
          success: function(data)
          {
             // parsing response from api
-            alert(data.essay);
+            //alert(data.essay);
+            $('#page-loading').fadeOut(function()
+            {
+               interface_page.load(data);
+            });
          }
       });
    }
@@ -66,18 +70,51 @@ function Loading_page () {
  */
 function Interface_page () {
    
-   function priv()
+   function change_background()
    {
+      $('body').css('background','#eaeaea');
+      //$('#container').animate({ backgroundColor: "#eaeaea" }, 1000);
+   }
 
+   function write_essay(html)
+   {
+      $('#content').html(html);
+   }
+
+   function write_biblio(data_array)
+   {
+      var output = "";
+      
+      var inline;
+      for (inline in data_array)
+      {
+         if (data_array[inline].citation != undefined)
+            output += data_array[inline].citation;
+            output += "<br />";
+      }
+
+      $('#content-biblio').html(output);
    }
 
    var exports = {};
    
-   function pub()
+   function load(data)
    {
+      /*
+       * Stuff passed to me:
+       * essay, bibliography(Array), beefed_essay, images(Array)
+       */
+      
+      // Writing HTML shit now
+      write_essay(data.beefed_essay);
+      write_biblio(data.bibliography);
+      //alert(data.bibliography);
 
+      change_background();
+      $('#page-interface').fadeIn();
+      
    }
-   exports.pub = pub;
+   exports.load = load;
 
    return exports;
 }

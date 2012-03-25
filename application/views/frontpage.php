@@ -40,3 +40,29 @@
       </div>
    </div>
 </div>
+
+<div id="page-interface" style="display: none;">
+   <div id="topbar">
+      <div id="topbar-container">
+         <div id="topbar-logo">
+            <img src="<?= base_url('assets/img/interface-logo.png') ?>" alt="topbar-logo" />
+         </div>
+      </div>
+   </div>
+   
+   <table border="0" id="content-container">
+   <tr>
+      <td valign="top" width="70%">
+         <div id="content"></div>
+      </td>
+      <td valign="top" width="30%">
+         <div id="content-images"></div>
+      </td>
+   </tr>
+   <tr>
+      <td colspan="2">
+         <div id="content-biblio"></div>
+      </td>
+   </tr> 
+   </table>
+</div>

@@ -5,12 +5,18 @@ body {
    height: 100%;
 }
 
+#container {
+   height: 100%;
+   width: 100%;
+}
+
 /*
  * Everything dealing with front_page
  */
 #header {
    width: 940px; 
-   margin: 20px auto;
+   margin: 0 auto;
+   padding: 20px 0;
 }
 
 #logo {
@@ -99,4 +105,39 @@ textarea
 /*
  * Everything dealing with interface_page
  */
+#topbar
+{
+   background: url(../img/interface-topbar) repeat-x;
+   width: 100%;
+   height: 145px;
+}
 
+#topbar-container
+{
+   width: 940px;
+   margin: 0 auto;
+}
+
+#topbar-logo
+{
+   float: right; 
+   width: 198px;
+   height: 150px;
+}
+
+#content-container
+{
+   width: 940px;
+   margin: 20px auto 0;
+}
+
+#content
+{
+   font-size: 12pt;
+   line-height: 22pt;
+}
+
+#content-biblio
+{
+   margin: 20px auto 0;
+}
