@@ -58,7 +58,7 @@ class Essay_Model extends CI_Model{
                 }
             }
             //just remove all other <TOPIC> stuff
-            $sentence = preg_replace("/<\/*TOPIC>/",'', $sentence);
+            //$sentence = preg_replace("/<\/*TOPIC>/",'', $sentence);
             $return[] = $sentence;
 
         }
