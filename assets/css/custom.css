@@ -43,3 +43,19 @@ body {
    margin: 0;
    padding: 0
 }
+
+textarea
+{
+   border: none;
+   resize: none;
+   outline: 0 none transparent;
+   height: 95%;
+   width: 98.5%;
+   padding: 10px;
+   background-color: transparent;
+   color: #fff;
+}
+
+*:focus {
+   outline: none;
+}

@@ -19,5 +19,9 @@
 </div>
 
 <div id="input">
+   <textarea rows="2" cols="22"></textarea>
+</div>
+
+<div id="actions">
 
 </div>
