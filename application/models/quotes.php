@@ -62,7 +62,7 @@ class Quotes extends CI_Model {
             }
         }
 
-        echo implode(' ', $essay);
+        return $essay;
     }
 
     function format ($author, $publication, $quote) {
