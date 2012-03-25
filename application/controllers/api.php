@@ -34,8 +34,7 @@ class API extends CI_Controller {
         $sentences = $this->Essay_Model->add_intext_citations($articles,$bibliography,$sentences);
         $sentences = $this->Essay_Model->add_filler_sentences($parsely_articles, $sentences,5);
         $sentences = $this->Quotes->run($entities, $parsely_articles, $sentences,4);
-        //$beefy_essay = implode(" ",$sentences);
-
+        $sentences = implode(" ",$sentences);
         $return = array();
         $return['essay'] = $input['essay'];
         $return['bibliography'] = $bibliography;
