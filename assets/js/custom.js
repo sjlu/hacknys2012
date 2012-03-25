@@ -78,15 +78,21 @@ function Interface_page () {
 
    function write_essay(html)
    {
-      $('#content').html(html);
+      var output = "";
+
+      for (var line in html)
+      {
+         output += html[line] + " ";
+      }
+
+      $('#content').html(output);
    }
 
    function write_biblio(data_array)
    {
       var output = "";
       
-      var inline;
-      for (inline in data_array)
+      for (var inline in data_array)
       {
          if (data_array[inline].citation != undefined)
          {
@@ -102,8 +108,7 @@ function Interface_page () {
    {
       var output = "";
 
-      var image;
-      for (image in data_array)
+      for (var image in data_array)
       {
          if (data_array[image][0] != undefined)
          {
@@ -123,7 +128,7 @@ function Interface_page () {
 
       // Get word count (hacked up)
       var word_count = 0;
-      var words = data.beefed_essay.split(" ");
+      var words = $('#content').html().split(" ");
       for (var i = 0; i < words.length; i++)
       {
          if (words[i] != "")
