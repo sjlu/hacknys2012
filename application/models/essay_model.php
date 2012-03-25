@@ -12,16 +12,22 @@ class Essay_Model extends CI_Model{
     }
 
     public function add_intext_citations($articles,$bibliography){
-        foreach ($articles as $keyword){
+        $text_with_citations = $this->text_with_entities;
+        //insert all the citations we have
+        foreach ($articles as $keyword => $val){
             //everywhere we see $keyword </TOPIC>, replace with the in-text citation
-            //    $text_with_citations 
-
+            $citation_obj = $bibliography[$keyword];
+            $text_with_citations = preg_replace("/$keyword.*?<\/TOPIC>/",$keyword . " " . $citation_obj['in-text'], $text_with_citations);
         }
+        //just remove all other <TOPIC> stuff
+        $text_with_citations = preg_replace("/<.*?TOPIC>/",'', $text_with_citations);
+        return $text_with_citations;
     }
 
     public function get_parsley_text($essay_text){
         //post the essay to parse.ly
         $url = $this->PARSELY_API_ROOT . "/parse";
+        $essay_text = preg_replace("/\n/", "---NEWLINE---",$essay_text);
         $result = self::post($url,array('text'=>$essay_text, 'wiki_filter' => 'false'));
         // if post went through
         if ($result ){
@@ -40,15 +46,22 @@ class Essay_Model extends CI_Model{
                         $seconds_waited += $seconds_to_sleep;
                     }else{
                         // done working, it should return the extracted entities 
-                        return $job_result['data'];
+                        $result = preg_replace("/---NEWLINE---/","\n",$job_result['data']);
+                        $result = preg_replace("/ ,/",",",$result);
+                        $result = preg_replace("/ '/","'",$result);
+                        $result = preg_replace("/ \"/","\"",$result);
+
+                        return $result;
                     }
                 }
             }else{
                 print "parse.ly did not return a url to check job status";
+                print_r($result);
                 return false; 
             }
         }else{
             print "parse.ly post failed";
+            var_dump($result);
             return false;
         }
 
