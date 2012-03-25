@@ -26,7 +26,16 @@ class Essay_Model extends CI_Model{
                 "Therefore, it can be argued that %s has been entirely misunderstood. In fact, the common and popular opinion has laboured under misconceptions about %s for some time.",
                 "Public opinion showed a distinct and unmistable response for %s in light of this.",
                 "The study of %s, always a topic of ample interest, was elevated to colossal proportions as a result.",
-                "This is only the surface of %s, however, and there is much more to explore"
+                "This is only the surface of %s, however, and there is much more to explore",
+                "%s was certainly larger than life. Perhaps too large.",
+                "%s signified a change in traditional thought that frightened men while capturing the hearts of women and children.",
+                "%s was the product of a revolution that spanned from inception to deletion.",
+                "%s was said to have caused a massive spike in human population, and was dubbed \"The Daddy of All Daddys\" by the National Association of Paternal Names.",
+                "%s had such a great impact that even the most expert of experts could not fully grasp the level of greatness in context. In other  words, %s was pretty great.",
+                "%s's conception was foretold by a swallow, and heralded by the appearance of a double rainbow across the sky over the mountain with a new star in the heavens.",
+                "At times, bringing up %s was known to lay cause for a spontaneous disrobing of the fairer gender.",
+                "In west Philadelphia, born and raised.. is where %s would spend most days.",
+                "%s's arrival as a harbringer of great news was fleeting at the moment someone decided to save 15 per-cent or more on their car insurance by switching to Geico."
                );
         //get random template
         $template = $filler_templates[array_rand($filler_templates)];
