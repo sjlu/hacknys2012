@@ -25,7 +25,8 @@ class Essay_Model extends CI_Model{
                 "The issues surrounding %s have been an area of extreme interest for some time, and while much work has been done, many questions have yet to be answered.",
                 "Therefore, it can be argued that %s has been entirely misunderstood. In fact, the common and popular opinion has laboured under misconceptions about %s for some time.",
                 "Public opinion showed a distinct and unmistable response for %s in light of this.",
-                "The study of %s, always a topic of ample interest, was elevated to colossal proportions as a result."
+                "The study of %s, always a topic of ample interest, was elevated to colossal proportions as a result.",
+                "This is only the surface of %s, however, and there is much more to explore"
                );
         //get random template
         $template = $filler_templates[array_rand($filler_templates)];
@@ -57,7 +58,7 @@ class Essay_Model extends CI_Model{
                 }
             }
             //just remove all other <TOPIC> stuff
-            $sentence = preg_replace("/<\/*TOPIC>/",'', $sentence);
+            //$sentence = preg_replace("/<\/*TOPIC>/",'', $sentence);
             $return[] = $sentence;
 
         }
@@ -87,7 +88,7 @@ class Essay_Model extends CI_Model{
                     }else{
                         // done working, it should return the extracted entities 
                         $result = preg_replace("/---NEWLINE---/","<br/>",$job_result['data']);
-                        $result = preg_replace("/ ([^[a-zA-Z0-9\s])/","$1",$result);
+                        //$result = preg_replace("/ ([^[a-zA-Z0-9\s])/","$1",$result);
 
                         return $result;
                     }

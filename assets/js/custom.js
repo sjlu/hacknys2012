@@ -24,47 +24,71 @@ function Front_page () {
 /*
  * All relevant functions to loading_page
  */
-function Loading_page () {
+var Loading_page = function () {
 
-   function run_ajax (data) {
-      $.ajax({
-         url: 'index.php/api',
-         type: 'POST',
-         async: true,
-         dataType: 'json',
-         timeout: 25000,
-         data: {data: JSON.stringify(data)},
-         success: function(data)
-         {
-            // parsing response from api
-            //alert(data.essay);
-            $('#page-loading').fadeOut(function()
+   var interval_id;
+
+   function Loading_page () {
+      var internal = {};
+
+      function run_ajax (data) {
+         $.ajax({
+            url: 'index.php/api',
+            type: 'POST',
+            async: true,
+            dataType: 'json',
+            timeout: 25000,
+            data: {data: JSON.stringify(data)},
+            success: function(data)
             {
-               interface_page.load(data);
-            });
-         }
-      });
+               // parsing response from api
+               //alert(data.essay);
+               $('#page-loading').fadeOut(function()
+               {
+                  clearInterval(interval_id);
+                  interface_page.load(data);
+               });
+            }
+         });
+      }
+      
+      var exports = {};
+
+      function load() 
+      {
+         $('#page-loading').fadeIn(function()
+         {
+            // creating an object to send to api
+            var data_obj = {};
+            data_obj.essay = $('#essay-text').val();
+
+            // ajax request
+            run_ajax(data_obj);
+            rotate_fact();
+            interval_id = setInterval(loading_page.rotate_fact, 4500);
+         });
+      }
+      exports.load = load;
+
+      function rotate_fact()
+      {
+         var facts = [
+            "The U.S. beef industry is made up of more than 1 million businesses, farms and ranches.",
+            "In 2007, there were 97 million cattle in the United States.",
+            "In 2007, 26.4 billion pounds of beef were produced."
+         ];
+      
+         var rand = Math.floor(Math.random() * facts.length);
+         $('#fact').hide().html(facts[rand]).fadeIn();
+      }
+      exports.rotate_fact = rotate_fact;
+
+      return exports;
    }
    
-   var exports = {};
+   return Loading_page;
 
-   function load() 
-   {
-      $('#page-loading').fadeIn(function()
-      {
-         // creating an object to send to api
-         var data_obj = {};
-         data_obj.essay = $('#essay-text').val();
-
-         // ajax request
-         run_ajax(data_obj);
-      });
-   }
-   exports.load = load;
-
-   return exports;
-}
-
+}();
 /*
  * All relevant functions to interface_page
  */
@@ -139,10 +163,20 @@ function Interface_page () {
             word_count++;
       }
 
+      var old_word_count = 0;
+      var words = data.essay.split(" ");
+      for (var i = 0; i < words.length; i++)
+      {
+         if (words[i] != "")
+            old_word_count++;
+      }
+
+      word_count = word_count - old_word_count;
+
       // Get loaded image count.
       var image_count = document.images.length-5;
       
-      $('#word-count').html(word_count);
+      $('#word-count').html("+"+word_count);
       $('#source-count').html(source_count);
       $('#image-count').html(image_count);
    }

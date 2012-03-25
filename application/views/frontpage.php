@@ -36,7 +36,7 @@
          <div class="progress progress-striped progress-info active">
             <div class="bar" style="width: 100%;"></div>
          </div>
-         Grounding your beef...
+         <span id="fact"></span>
       </div>
    </div>
 </div>
@@ -49,8 +49,8 @@
             </div>
 
             <div class="toolbar-statbox">
-               <h4>Word Count</h4>
-               <h2 id="word-count"></h2>
+               <h4>Word Difference</h4>
+               <h2 id="word-count" class="green"></h2>
             </div>
 
             <div class="toolbar-statbox">
