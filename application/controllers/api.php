@@ -28,12 +28,12 @@ class API extends CI_Controller {
 
         $bibliography = $this->Bibliography->get_citations($articles);
 
-        $essay_with_citations = $this->Essay_Model->add_intext_citations($articles,$bibliography);
+        $beefed_essay = $this->Essay_Model->add_intext_citations($articles,$bibliography);
 
         $return = array();
         $return['essay'] = $input['essay'];
         $return['bibliography'] = $bibliography;
-        $return['essay_with_citations'] = $essay_with_citations;
+        $return['beefed_essay'] = $beefed_essay;
         $return['images'] = $images;
 
 
