@@ -7,8 +7,24 @@
  * Contains all functions and actions relevant
  * to the frontpage in a nice substanciated function
  */
-function Frontpage () {
+function Front_page () {
    var exports = {};
+
+   function continue_click () {
+      $('#page-index').fadeOut(function()
+      {
+         loading_page.load();
+      });
+   }
+   exports.continue_click = continue_click;
+
+   return exports;
+}
+
+/*
+ * All relevant functions to loading_page
+ */
+function Loading_page () {
 
    function run_ajax (data) {
       $.ajax({
@@ -25,22 +41,43 @@ function Frontpage () {
          }
       });
    }
+   
+   var exports = {};
 
-   function continue_click () {
-      $('#page-index').fadeOut(function()
+   function load() 
+   {
+      $('#page-loading').fadeIn(function()
       {
-         $('#page-loading').fadeIn(function()
-         {
-            // creating an object to send to api
-            var data_obj = {};
-            data_obj.essay = $('#essay-text').val();
+         // creating an object to send to api
+         var data_obj = {};
+         data_obj.essay = $('#essay-text').val();
 
-            // ajax request
-            run_ajax(data_obj);
-         });
+         // ajax request
+         run_ajax(data_obj);
       });
    }
-   exports.continue_click = continue_click;
+   exports.load = load;
+
+   return exports;
+}
+
+/*
+ * All relevant functions to interface_page
+ */
+function Interface_page () {
+   
+   function priv()
+   {
+
+   }
+
+   var exports = {};
+   
+   function pub()
+   {
+
+   }
+   exports.pub = pub;
 
    return exports;
 }
@@ -48,7 +85,9 @@ function Frontpage () {
 /*
  * Load all the class/function here.
  */
-var frontpage = Frontpage();
+var front_page = Front_page();
+var loading_page = Loading_page();
+var interface_page = Interface_page();
 
 /*
  * All event based listeners should be placed
@@ -61,6 +100,6 @@ $(document).ready(function()
    // This the click event handler javascript.
    $('#continue-btn').click(function()
    {
-      frontpage.continue_click();
+      front_page.continue_click();
    });
 });

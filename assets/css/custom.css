@@ -5,6 +5,9 @@ body {
    height: 100%;
 }
 
+/*
+ * Everything dealing with front_page
+ */
 #header {
    width: 940px; 
    margin: 20px auto;
@@ -66,9 +69,11 @@ textarea
    text-align: center;
    width: 940px;
    margin: 20px auto;
-
 }
 
+/*
+ * Everything dealing with loading_page
+ */
 .centered {
    border: 0;
    height: 50%;
@@ -90,3 +95,8 @@ textarea
    -webkit-border-radius: 10px;
    -moz-border-radius: 10px;
 }
+
+/*
+ * Everything dealing with interface_page
+ */
+
