@@ -4,7 +4,7 @@ class Quotes extends CI_Model {
 
     # inserts quotes
     function run ($topics, $input_articles, $essay, $chance) {
-        $this->load->model('Essay_Model');
+        return $essay;
         $this->load->model('Sentence');
 
         $possible_articles = array();
