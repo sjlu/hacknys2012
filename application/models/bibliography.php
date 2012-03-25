@@ -20,7 +20,7 @@ class Bibliography extends CI_Model {
             //additional possible fields: author_first,author_last, pub_date , issue_num
 
             $in_text = '("' . $topic['publisher'] . '")';
-            $citation = "";
+            $citation = "<span class='new citation'>";
             if(array_key_exists('author',$topic)){
                 //move last name to front, put comma (assumes only 1 author) 
                 $names =  preg_split('/\s+/', $topic['author']);
@@ -60,7 +60,7 @@ class Bibliography extends CI_Model {
             $citation .= " Web.";
             $citation .= date(" d M Y"); 
             $citation .= "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;" . $topic['url'] . "&gt;";
-            $citation .= "<br/>\n";
+            $citation .= "<br/></span>\n";
 
             $return[$key] = array('in-text'=> $in_text, 'citation' => $citation);
         }
