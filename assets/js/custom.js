@@ -330,7 +330,10 @@ $(document).ready(function()
       delay: { show: 500, hide: 1000 }
    });
 
+   var clearedOnce = false;
    $('textarea').click(function () {
+       if (clearedOnce) return;
+       clearedOnce = true;
        $(this).val('');
    });
 });
