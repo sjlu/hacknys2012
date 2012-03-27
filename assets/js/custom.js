@@ -37,7 +37,7 @@ var Loading_page = function () {
             type: 'POST',
             async: true,
             dataType: 'json',
-            timeout: 25000,
+            timeout: 65000,
             data: {data: JSON.stringify(data)},
             success: function(data)
             {
@@ -107,7 +107,7 @@ function Interface_page () {
          type: 'POST',
          async: true,
          dataType: 'json',
-         timeout: 25000,
+         timeout: 65000,
          data: {data: JSON.stringify(data)},
          success: function(data)
          {

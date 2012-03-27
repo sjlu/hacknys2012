@@ -2,7 +2,7 @@
 
 class Essay_Model extends CI_Model{
 
-    private $PARSELY_TIMEOUT_SECONDS = 20;
+    private $PARSELY_TIMEOUT_SECONDS = 60;
     private $PARSELY_API_ROOT = "http://hack.parsely.com";
     private $entities;
     private $text_with_entities;

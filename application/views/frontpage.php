@@ -17,6 +17,8 @@
             <li>Russell Frank (<a href="https://twitter.com/russjf">@russjf</a>) 
             <li>Wayne Sun (<a href="https://twitter.com/_waynesun">@_waynesun</a>)
             <li>Jarek Sedlacek
+         </ul>
+         Made under the <a href="http://parse.ly">parse.ly</a> API. Much thanks to them for helping us out!
       </div>
    </div>
 
